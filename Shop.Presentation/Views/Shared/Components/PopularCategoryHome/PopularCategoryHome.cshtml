@@ -1,0 +1,17 @@
+﻿@using Shop.Application.StaticTools
+@model Shop.Domain.ViewModels.Admin.Products.FilterProductCategoriesViewModel
+
+@foreach (var item in Model.ProductCategories)
+{
+    <!-- item -->
+    <div class="col-lg-2 col-6">
+        <a asp-area="" asp-controller="Product" asp-action="Products" asp-route-FilterByCategory="@item.UrlName" class="category-card-vertical">
+            <img src="@(PathsExtensions.ImageCategoryOrigin + item.ImageName)" alt="category" class="img-fluid mb-3">
+            <div class="card-inner text-center">
+                <h6 class="card-title">@item.Title</h6>
+                <div class="card-subtitle">+50 محصول</div>
+            </div>
+        </a>
+    </div>
+
+}

@@ -1,0 +1,129 @@
+﻿@using Shop.Application.StaticTools
+@using Shop.Domain.ViewModels.Admin.Products
+@model FilterProductViewModel
+@{
+    ViewData["Title"] = "لیست محصولات";
+}
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-xl-2">
+                        <a asp-area="Admin" asp-controller="Product" asp-action="CreateProduct" class="btn btn-primary mb-3 mb-lg-0"><i class='bx bxs-plus-square'></i>محصول جدید</a>
+                    </div>
+                    <div class="col-lg-9 col-xl-10">
+                        <form asp-area="Admin" asp-controller="Product" asp-action="FilterProduct" class="float-lg-end" method="get" id="filter-Form">
+                            <input type="hidden" asp-for="PageId" />
+                            <div class="row row-cols-lg-2 row-cols-xl-auto g-2">
+                                <div class="col">
+                                    <div class="position-relative">
+                                        <input asp-for="ProductName" type="text" class="form-control ps-5" placeholder="جستجوی با نام محصول ...."> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary mb-3 mb-lg-0">فیلتر کن</button>
+                                </div>
+                                <div class="col">
+                                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                        <button type="button" class="btn btn-white">مرتب سازی</button>
+                                        <div class="btn-group" role="group">
+                                            <select id="btnGroupDrop1" type="button" class="btn btn-white dropdown-toggle dropdown-toggle-nocaret px-1" data-bs-toggle="dropdown" aria-expanded="false" asp-for="ProductOrder" asp-items="@Html.GetEnumSelectList<ProductOrder>()"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                        <button type="button" class="btn btn-white">نوع کالکشن</button>
+                                        <div class="btn-group" role="group">
+
+                                            <select id="btnGroupDrop1" type="button" class="btn btn-white dropdown-toggle dropdown-toggle-nocaret px-1" data-bs-toggle="dropdown" aria-expanded="false" asp-for="ProductState" asp-items="@Html.GetEnumSelectList<ProductState>()"></select>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 product-grid">
+    @if (Model.Products != null && Model.Products.Any())
+    {
+        @foreach (var item in Model.Products)
+        {
+            <div class="col">
+                <div class="card">
+                    <img src="@(!string.IsNullOrEmpty(item.ProductImageName) ? PathsExtensions.ImageProductOrigin + item.ProductImageName : "")" class="card-img-top" alt="...">
+                    <div class="">
+                        @if (item.IsActive)
+                        {
+                            <span class="m-3 badge badge-pill bg-success">موجود</span>
+                        }
+                        else
+                        {
+                            <span class="m-3 badge badge-pill bg-danger">ناموجود</span>
+                        }
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title cursor-pointer">@item.ProductName</h6>
+                        <div class="clearfix">
+                            <p class="mb-1 float-start"><strong>توضیحات: </strong>@item.ShortDescription</p>
+                            <br />
+                            <p class="mb-1 float-start fw-bold"><strong>قیمت: </strong>@item.Price ریال</p>
+
+
+                        </div>
+                        <div class="d-flex align-items-center mt-3 fs-6">
+                            <div class="d-flex order-actions">
+                                <a asp-area="Admin" asp-controller="Product" asp-action="GalleryProduct" asp-route-productId="@item.Id" class=" m-2 text-primary bg-light-primary border-0"><i class='lni lni-gallery'></i></a>
+                                <a asp-area="Admin" asp-controller="Product" asp-action="ProductGalleries" asp-route-productId="@item.Id" class=" m-2 text-danger bg-light-info border-0"><i class='lni lni-list'></i></a>
+
+                                <a asp-area="Admin" asp-controller="Product" asp-action="EditProduct" asp-route-productId="@item.Id" class="m-2 text-warning bg-light-warning border-0"><i class='bx bxs-edit'></i></a>
+                                @if (item.IsDelete)
+                                {
+                                    <a asp-area="Admin" asp-controller="Product" asp-action="RestoreProduct" asp-route-productId="@item.Id" class=" m-2 text-black bg-light-info border-0"><i class='bx bx-refresh'></i></a>
+                                }
+                                else
+                                {
+                                    <a asp-area="Admin" asp-controller="Product" asp-action="DeleteProduct" asp-route-productId="@item.Id" class=" m-2 text-danger bg-light-danger border-0"><i class='bx bxs-trash'></i></a>
+                                }
+                            </div>
+                     
+                        </div>
+                        <div class="d-flex align-items-center mt-0 fs-6">
+                            <div class="d-flex order-actions">
+                                <a asp-area="Admin" asp-controller="Product" asp-action="CreateProductFeatuer" asp-route-productId="@item.Id" class=" m-2 text-success bg-light-mehandi border-0"><i class='bx bx-highlight'></i></a>
+                                <a asp-area="Admin" asp-controller="Product" asp-action="ProductFeatuers" asp-route-productId="@item.Id" class=" m-2 text-primary bg-light-shineblue border-0"><i class='bx-list-ol'></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="d-flex align-items-center">
+            <div class="font-35 text-info">
+                <i class="bx bx-info-square"></i>
+            </div>
+            <div class="ms-3">
+                <h6 class="mb-0 text-info">هشدار اطلاع</h6>
+                <div>آیتمی برای نمایش موجود نمی باشد</div>
+            </div>
+        </div>
+    }
+    <br />
+
+</div><!--end row-->
+<div class="row">
+    <partial name="_AdminPageingProductPartial" model="@Model.GetCurrentPaging()" />
+</div>

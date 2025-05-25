@@ -1,0 +1,25 @@
+﻿@model List<Shop.Domain.ViewModels.Site.Products.ProductItemViewModel>
+@if (Model != null && Model.Any())
+{
+    <div class="col-lg-12 col-md-12 col-xs-12 pr order-1 d-block">
+        <div class="slider-widget-products">
+            <div class="widget widget-product card">
+                <header class="card-header">
+                    <span class="title-one">همه محصولات</span>
+                    <h3 class="card-title"></h3>
+                </header>
+                <div class="product-carousel owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all; width: 1445px;">
+                            @foreach (var product in Model)
+                            {
+                                <partial name="_ProductBox" model="product"/>
+                            }
+                        </div>
+                    </div>
+                    <div class="owl-nav"><button type="button" role="presentation" class="owl-prev disabled"><i class="fa fa-angle-right"></i></button><button type="button" role="presentation" class="owl-next"><i class="fa fa-angle-left"></i></button></div><div class="owl-dots disabled"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

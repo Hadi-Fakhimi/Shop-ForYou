@@ -1,0 +1,73 @@
+﻿@using Shop.Domain.ViewModels.Account
+@model RegisterUserViewModel
+@{
+    Layout = "_AccountLayout";
+    ViewData["Title"] = "ثبت نام";
+}
+@section Script{
+    <partial name="_CaptchaScript" />
+    <partial name="_ValidationScriptsPartial"/>
+}
+<!-- Register----------------------------------->
+<div class="container">
+    <div class="row">
+        <div class="col-lg">
+            <section class="page-account-box">
+                <div class="col-lg-6 col-md-6 col-xs-12 mx-auto">
+                    <div class="ds-userlogin">
+                        <a asp-controller="Home" asp-action="Index" class="account-box-logo">digismart</a>
+                        <div class="account-box">
+                            <div class="account-box-headline">
+                                <a asp-controller="Account" asp-action="Login" class="login-ds">
+                                    <span class="title">ورود</span>
+                                    <span class="sub-title">به فور یو</span>
+                                </a>
+                                <a asp-controller="Account" asp-action="Register" class="register-ds active">
+                                    <span class="title">ثبت نام</span>
+                                    <span class="sub-title">در فور یو</span>
+                                </a>
+                            </div>
+                            <div class="Login-to-account mt-4">
+                                <div class="account-box-content">
+                                    <h4>ثبت نام در فور یو</h4>
+                                    <form asp-controller="Account" asp-action="Register" method="post" class="form-account text-right">
+                                        <partial name="_CaptchaInput" />
+                                        <div class="form-account-title">
+                                            <label for="first-name">نام</label>
+                                            <input asp-for="FirstName" type="text" class="number-email-input" id="first-name">
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-account-title">
+                                            <label for="last-name">نام خانوادگی</label>
+                                            <input asp-for="LastName" type="text" class="number-email-input" id="last-name">
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-account-title">
+                                            <label for="email-phone">شماره موبایل</label>
+                                            <input asp-for="PhoneNumber" type="text" class="number-email-input" id="email-phone">
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-account-title">
+                                            <label for="password">رمز عبور</label>
+                                            <input asp-for="Password" type="password" class="password-input" >
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-account-title">
+                                            <label for="password">تکرار رمز عبور</label>
+                                            <input asp-for="ConfirmPassword" type="password" class="password-input">
+                                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-row-account">
+                                            <button class="btn btn-primary btn-register">ثبت نام در فور یو</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+<!-- Register----------------------------------->

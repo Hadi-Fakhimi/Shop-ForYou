@@ -1,0 +1,63 @@
+﻿<div class="primary-menu">
+	<nav class="navbar navbar-expand-lg align-items-center">
+		<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+			<div class="offcanvas-header border-bottom">
+				<div class="d-flex align-items-center">
+					<div class="">
+						<img src="~/Admin/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+					</div>
+					<div class="">
+						<h4 class="logo-text">فور یو ادمین</h4>
+					</div>
+				</div>
+				<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			</div>
+			<div class="offcanvas-body">
+				<ul class="navbar-nav align-items-center flex-grow-1">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+							<div class="parent-icon">
+								<i class='bx bx-home-alt'></i>
+							</div>
+							<div class="menu-title d-flex align-items-center">داشبورد</div>
+							<div class="ms-auto dropy-icon"><i class='bx bx-chevron-down'></i></div>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="FilterUser"><i class='lni lni-users'></i>کاربران فروشگاه</a></li>
+							<li><a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="FilterRole"><i class='fadeIn animated bx bx-detail'></i>مدیریت نقش ها</a></li>
+
+						</ul>
+					</li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+                            <div class="parent-icon">
+                                <i class='bx bx-cart'></i>
+                            </div>
+                            <div class="menu-title d-flex align-items-center">فروشگاه</div>
+                            <div class="ms-auto dropy-icon"><i class='bx bx-chevron-down'></i></div>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="FilterProduct"><i class='lni lni-cart-full'></i>مدیریت محصولات</a></li>
+                            <li><a class="dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="FilterProductCategories"><i class='fadeIn animated bx bx-detail'></i>مدیریت دسته بندی</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+                            <div class="parent-icon">
+								<i class="lni lni-slideshare"></i>
+                            </div>
+                            <div class="menu-title d-flex align-items-center">اسلایدر</div>
+                            <div class="ms-auto dropy-icon"><i class='bx bx-chevron-down'></i></div>
+                        </a>
+                        <ul class="dropdown-menu">
+							<li><a class="dropdown-item" asp-area="Admin" asp-controller="Site" asp-action="FilterSlider"><i class="lni lni-slideshare"></i>مدیریت اسلایدر</a></li>
+
+                        </ul>
+                    </li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</div>

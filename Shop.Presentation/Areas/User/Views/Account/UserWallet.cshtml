@@ -1,0 +1,75 @@
+﻿@using Shop.Domain.ViewModels.Wallet
+@model FilterWalletViewModel
+@{
+    ViewData["Title"] = "لیست تراکنش های کاربر";
+}
+
+
+
+<div class="container-main">
+    <div class="d-block">
+
+        <div class="col-lg">
+            <div class="post-item-profile order-1 d-block">
+                <div class="col-lg-3 col-md-3 col-xs-12 pr">
+                    @await Component.InvokeAsync("UserSideBar")
+                </div>
+                <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                    <div class="profile-content">
+                        <div class="profile-stats">
+                            <div class="profile-address">
+                                <div class="middle-container">
+                                    <form asp-area="User" asp-controller="Account" asp-action="UserWallet" id="filter-Form">
+                                        <input asp-for="PageId" type="hidden">
+                                        <div class="table-responsive">
+                                            @if(Model.UserWallets != null && Model.UserWallets.Any()){
+                                                <table class="table">
+                                                    <caption>@ViewData["Title"]</caption>
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">عنوان تراکنش</th>
+                                                            <th scope="col">مبلغ(ریال)</th>
+                                                            <th scope="col">تاریخ تراکنش</th>
+                                                            <th scope="col">نوع تراکنش</th>
+                                                            <th scope="col">توضیحات</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var item in Model.UserWallets)
+                                                        {
+                                                            <tr>
+
+                                                                <td>@item.WalletType.GetEnumName()</td>
+                                                                <td>@item.Amount.ToString("#,0")</td>
+                                                                <td>@item.CreateDate.ToStringShamsiDate()</td>
+                                                                <td>@if (item.IsPay) {<p class="text-success">موفق</p>
+                                                                    }else {<p class="text-danger">ناموفق</p> }
+                                                                </td>
+                                                                <td>@item.Description</td>
+                                                                
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                                <partial name="_PageingPartial" model="Model.GetCurrentPaging()" />
+                                            }
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

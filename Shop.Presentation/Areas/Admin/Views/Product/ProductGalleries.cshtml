@@ -1,0 +1,45 @@
+﻿@using Shop.Application.StaticTools
+@using Shop.Domain.Models.ProductEntities
+@model List<ProductGalleries>
+@{
+    ViewData["Title"] = "لیست تصاویر محصول";
+    var index = 0;
+}
+
+<div class="row">
+    <h6 class="mb-3 text-uppercase">@ViewData["Title"]</h6>
+    <hr />
+    <br />
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            index++;
+
+            <div class="col-sm-12 col-md-6 col-xl-2">
+                <div class="card">
+                    <img src="@(!string.IsNullOrEmpty(item.ImageName) ? PathsExtensions.ImageProductOrigin + item.ImageName : "")" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <p class="card-title">تصویر شماره:@index</p>
+                        <a asp-area="Admin" asp-controller="Product" asp-action="DeleteImageGallery" asp-route-galleryId = "@item.Id" class="btn btn-danger btn-sm">حذف</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert border-0 border-start border-5 border-dark alert-dismissible fade show py-2">
+            <div class="d-flex align-items-center">
+                <div class="font-35">
+                    <i class="bx bx-bell"></i>
+                </div>
+                <div class="ms-3">
+                    <div>آیتمی برای نمایش موجود نمی باشد</div>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+</div>
+

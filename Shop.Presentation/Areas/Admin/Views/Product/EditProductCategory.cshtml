@@ -1,0 +1,55 @@
+﻿@using Shop.Application.StaticTools
+@using Shop.Domain.ViewModels.Admin.Products
+@model EditProductCategoryViewModel
+@{
+    ViewData["Title"] = "ویرایش دسته بندی محصول";
+}
+
+@section Script {
+    <partial name="_ValidationScriptsPartial"></partial>
+}
+<form method="post" asp-area="Admin" asp-controller="Product" asp-action="EditProductCategory" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-12 col-xl-8">
+            <h6 class="mb-0 text-uppercase">@ViewData["Title"]</h6>
+            <hr />
+            <div class="card">
+                <div class="card-body">
+                    <input type="hidden" asp-for="ProductCategoryId"/>
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control input-group mb-3" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UrlName" class="control-label"></label>
+                        <input asp-for="UrlName" class="form-control input-group mb-3" />
+                        <span asp-validation-for="UrlName" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">ویرایش</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12 col-xl-4">
+            <h6 class="mb-0 text-uppercase">آپلود تصویر</h6>
+            <hr />
+            <div class="card">
+                <img src="@(!string.IsNullOrEmpty(Model.ImageName)? PathsExtensions.ImageCategoryOrigin + Model.ImageName: "")" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <div class="btn  float-left" style="background-color:black;color:white;">
+                        <input name="image" type="file" style="border:none;" placeholder="تصویر مورد نظر را آپلود کنید....">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+

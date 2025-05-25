@@ -1,0 +1,101 @@
+﻿@using Shop.Application.StaticTools
+@model Shop.Domain.ViewModels.Admin.Account.FilterUserViewModel
+
+@{
+    ViewData["Title"] = "لیست کاربران";
+    Layout = "_AdminLayout";
+}
+
+
+<div class="row">
+    <div class="col">
+        <div class="card radius-10 mb-0">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-1">لیست کاربران</h5>
+                    </div>
+                    <form asp-area="Admin" asp-controller="User" asp-action="FilterUser" class="ms-auto" id="filter-Form">
+                        <input type="hidden" asp-for="PageId" />
+                        <label class="form-label" id="PhoneNumber"> فیلتر بر اساس شماره همراه:</label>
+                        <input type="text" asp-for="PhoneNumber" class="form-control" placeholder="شماره همراه:" />
+                        <button class="btn btn-primary btn-sm radius-10 mt-1" type="submit">فیلتر</button>
+                    </form>
+                </div>
+
+                <div class="table-responsive mt-3">
+                    <table class="table align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>آواتار</th>
+                                <th>نام</th>
+                                <th>نام خانوادگی</th>
+                                <th>تلفن همراه</th>
+                                <th>فعال / غیر فعال</th>
+                                <th>تاریخ عضویت</th>
+                                <th>عمل ها</th>
+                            </tr>
+                        </thead>
+
+                        @if (Model.Users != null && Model.Users.Any())
+                        {
+                            <tbody>
+                                @foreach (var item in Model.Users)
+                                {
+                                    <tr>
+
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="recent-product-img">
+                                                    <img src="@(item.UserAvatar == "dfault.png"? PathsExtensions.UserDefaultOrigin : PathsExtensions.UserAvatarOrigin + item.UserAvatar )" alt="آواتار">
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@item.FirstName</td>
+                                        <td>@item.LastName</td>
+                                        <td>@item.PhoneNumber</td>
+                                        <td class="">
+                                            @if (item.IsMobileActive)
+                                            {
+                                                <span class="badge bg-light-success text-success w-100">فعال</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-light-danger text-danger w-100">غیر فعال</span>
+                                            }
+
+
+                                        </td>
+                                        <td>@item.CreateDate.ToStringShamsiDate()</td>
+                                        <td>
+                                            <div class="d-flex order-actions">
+                                                <a  class="text-danger bg-light-danger border-0"><i class='bx bxs-trash'></i></a>
+                                                <a asp-area="Admin" asp-controller="User" asp-action="EditUser" asp-route-userId="@item.Id" class="ms-4 text-primary bg-light-primary border-0"><i class='bx bxs-edit'></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        }
+                        else
+                        {
+                            <div class="d-flex align-items-center">
+                                <div class="font-35 text-info">
+                                    <i class="bx bx-info-square"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0 text-info">هشدار اطلاع</h6>
+                                    <div>آیتمی برای نمایش موجود نمی باشد</div>
+                                </div>
+                            </div>
+                        }
+
+                    </table>
+                    <br />
+                    <partial name="_AdminPageingPartial" model="@Model.GetCurrentPaging()" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div><!--end row-->

@@ -1,0 +1,77 @@
+﻿@using Shop.Domain.ViewModels.Account
+@model ActiveAccountViewModel
+@{
+    Layout = "_AccountLayout";
+    ViewData["Title"] = "فعالسازی حساب کاربری";
+
+}
+<div class="container">
+    <div class="row">
+        <div class="col-lg">
+            <section class="page-account-box">
+                <div class="col-lg-6 col-md-6 col-xs-12 mx-auto">
+                    <div class="ds-userlogin">
+                        <a href="#" class="account-box-logo">digismart</a>
+                        <div class="account-box">
+                            <div class="Login-to-account mt-4">
+                                <div class="account-box-content">
+                                    <div class="message-light">
+                                        <form method="post" asp-action="ActiveAccount">
+                                            <div class="massege-light-send">
+                                                برای شماره همراه @Model.PhoneNumber کد تایید ارسال گردید
+                                                <div class="form-edit-number">
+                                                    <a asp-controller="Account" asp-action="Register" class="edit-number-link">ویرایش شماره</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-box-verify-content">
+                                                <div class="form-account">
+                                                    <div class="form-account-title">کد فعال سازی پیامک شده را وارد کنید</div>
+                                                    <div class="form-account-row">
+                                                        <div class="lines-number-input">
+                                                            <input type="text" class="line-number-account" maxlength="1" id="code1">
+                                                            <input type="text" class="line-number-account" maxlength="1" id="code2">
+                                                            <input type="text" class="line-number-account" maxlength="1" id="code3">
+                                                            <input type="text" class="line-number-account" maxlength="1" id="code4">
+                                                            <input type="text" class="line-number-account" maxlength="1" id="code5">
+
+                                                            <input type="hidden" asp-for="ActiveCode" id="ActiveCode" />
+                                                            <input type="hidden" asp-for="PhoneNumber" />
+                                                            <span class="text-danger" asp-validation-for="ActiveCode"></span>
+                                                        </div>
+                                                        <partial name="_CaptchaInput" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="account-footer">
+                                                <div class="account-footer">
+                                                    <div class="form-row-account">
+                                                        <button type="submit" class="btn btn-primary btn-login">فعالسازی حساب</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+@section Script {
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="_CaptchaScript" />
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            var activeCode = '';
+            for (var i = 1; i <= 5; i++) {
+                activeCode += document.getElementById('code' + i).value;
+            }
+            document.getElementById('ActiveCode').value = activeCode;
+        });
+    </script>
+}

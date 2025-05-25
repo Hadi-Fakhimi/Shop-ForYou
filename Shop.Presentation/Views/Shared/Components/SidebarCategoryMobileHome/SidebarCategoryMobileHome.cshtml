@@ -1,0 +1,20 @@
+﻿@model Shop.Domain.ViewModels.Admin.Products.FilterProductCategoriesViewModel
+<li>
+    <a href="#" class="" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <i class="mdi mdi-chevron-down"></i>دسته بندی محصولات
+    </a>
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample" style="">
+        <ul>
+            <li class="has-sub open">
+                <a class="category-level-2">محصولات</a>
+                <ul style="display: block;">
+                    
+                    @foreach (var item in Model.ProductCategories)
+                    {
+                        <li><a asp-area="" asp-controller="Product" asp-action="Products" asp-route-FilterByCategory="@item.UrlName" class="category-level-3">@item.Title</a></li>
+                    }
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li>

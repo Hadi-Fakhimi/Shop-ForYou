@@ -1,0 +1,40 @@
+﻿@using Shop.Application.StaticTools
+@model Shop.Domain.ViewModels.Site.Products.ProductItemViewModel
+
+<div class="owl-item tab-item active" style="width: 289.467px; margin-left: 10px;">
+    <div class="item">
+        <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@Model.ProductId" class="d-block hover-img-link" data-toggle="modal" data-target="#exampleModal">
+            <img src="@(PathsExtensions.ImageProductOrigin + Model.ProductImageName)" class="img-fluid" alt="">
+            <span class="icon-view">
+                <strong><i class="fa fa-eye"></i></strong>
+            </span>
+        </a>
+        <h2 class="post-title">
+            <a asp-area="" asp-controller="Product" asp-action="ProductDetail" asp-route-productId="@Model.ProductId">
+                @Model.ProductName
+            </a>
+        </h2>
+        <div class="price">
+            <ins><span>@Model.Price.ToString("#,0")<span>تومان</span></span></ins>
+        </div>
+        <div class="actions">
+            <ul>
+                <li class="action-item like">
+                    <button class="btn btn-light add-product-wishes" type="submit">
+                        <i class="fa fa-heart-o"></i>
+                    </button>
+                </li>
+                <li class="action-item compare">
+                    <button class="btn btn-light btn-compare" type="submit">
+                        <i class="fa fa-random"></i>
+                    </button>
+                </li>
+                <li class="action-item add-to-cart">
+                    <button class="btn btn-light btn-add-to-cart" type="submit">
+                        <i class="fa fa-shopping-cart"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

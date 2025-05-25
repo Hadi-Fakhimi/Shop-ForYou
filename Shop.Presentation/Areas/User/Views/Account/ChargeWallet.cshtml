@@ -1,0 +1,42 @@
+﻿@using Shop.Domain.ViewModels.Wallet
+@model  ChargeWalletViewModel
+@{
+    ViewData["Title"] = "شارژ کیف پول";
+}
+
+<div class="container-main">
+    <div class="d-block">
+
+        <div class="col-lg">
+            <div class="post-item-profile order-1 d-block">
+                <div class="col-lg-3 col-md-3 col-xs-12 pr">
+                    @await Component.InvokeAsync("UserSideBar")
+                </div>
+                <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                    <div class="profile-content">
+                        <div class="profile-stats">
+                            <div class="profile-address">
+                                <div class="middle-container">
+                                    <form asp-area="User" asp-controller="Account" asp-action="ChargeWallet" method="post" class="form-checkout">
+                                        <div class="form-checkout-row">
+                                            <label for="password">مبلغ شارژ کیف پول </label>
+                                            <input asp-for="Amount" type="text" id="password" class="input-password-checkout form-control">
+                                            <span asp-validation-for="Amount" class="text-danger"></span>
+
+                                            <div class="AR-CR">
+                                                <button class="btn-registrar">شارژ کیف پول</button>
+                                                <a href="/User/" class="cancel-edit-address" data-dismiss="modal" aria-label="Close">بازگشت</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

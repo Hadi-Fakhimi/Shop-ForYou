@@ -1,0 +1,36 @@
+﻿@model List<Shop.Domain.ViewModels.Site.Products.ProductItemViewModel>
+
+@if (Model != null && Model.Any())
+{
+    <div class="container-amazing col-12">
+        <div class="col-lg-3 display-md-none pull-right">
+            <div class="amazing-product text-center">
+                <a href="#">
+                    <img src="/images/slider-amazing/shopping-cart.svg" alt="">
+                </a>
+                <h3 class="amazing-heading-title amazing-size-default">محصولات جدید فور یو</h3>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-12 pull-left">
+            <div class="slider-widget-products mb-0">
+                <div class="widget widget-product card">
+                    <header class="card-header">
+                        <span class="title-one">محصولات جدید</span>
+                                
+                    </header>
+                    <div class="product-carousel owl-carousel owl-theme owl-rtl owl-loaded owl-drag">
+                        <div class="owl-stage-outer">
+                            <div class="owl-stage" style="transform: translate3d(559px, 0px, 0px); transition: 0.5s; width: 1398px;">
+                                @foreach (var product in Model)
+                                {
+                                    <partial name="_NewProductBox" model="product"/>
+                                }   
+                            </div>
+                        </div>
+                        <div class="owl-nav"><button type="button" role="presentation" class="owl-prev"><i class="fa fa-angle-right"></i></button><button type="button" role="presentation" class="owl-next disabled"><i class="fa fa-angle-left"></i></button></div><div class="owl-dots disabled"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

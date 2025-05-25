@@ -1,0 +1,67 @@
+﻿@using Shop.Application.StaticTools
+@model Shop.Domain.ViewModels.Site.Sliders.EditSliderViewModel
+@{
+    ViewData["Title"] = "ویرایش اسلایدر جدید";
+}
+
+@section Script {
+    <partial name="_ValidationScriptsPartial"></partial>
+}
+<form method="post" asp-area="Admin" asp-controller="Site" asp-action="EditSlider" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-12 col-xl-8">
+            <h6 class="mb-0 text-uppercase">@ViewData["Title"]</h6>
+            <hr />
+            <div class="card">
+                <div class="card-body">
+                    <input type="hidden" asp-for = "SliderId"/>
+                    <input type="hidden" asp-for="SliderImageName"/>
+                    <div class="form-group">
+                        <label asp-for="SliderTitle" class="control-label"></label>
+                        <input asp-for="SliderTitle" class="form-control input-group mb-3" />
+                        <span asp-validation-for="SliderTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SliderHref" class="control-label"></label>
+                        <input asp-for="SliderHref" class="form-control input-group mb-3" />
+                        <span asp-validation-for="SliderHref" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SliderPrice" class="control-label"></label>
+                        <input asp-for="SliderPrice" class="form-control input-group mb-3" />
+                        <span asp-validation-for="SliderPrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SliderText" class="control-label"></label>
+                        <input asp-for="SliderText" class="form-control input-group mb-3" />
+                        <span asp-validation-for="SliderText" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SliderTextButton" class="control-label"></label>
+                        <input asp-for="SliderTextButton" class="form-control input-group mb-3" />
+                        <span asp-validation-for="SliderTextButton" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">ویرایش</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12 col-xl-4">
+            <h6 class="mb-0 text-uppercase">آپلود تصویر</h6>
+            <hr />
+            <div class="form mt-5 ml-5 pl-5">
+                <div class="btn  float-left" style="background-color:black;color:white;">
+                    <input src="@PathsExtensions.ImageSliderThumb + @Model.SliderImageName" name="imageFile" type="file" style="border:none;" placeholder="تصویر مورد نظر را آپلود کنید....">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+

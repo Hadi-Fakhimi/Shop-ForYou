@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "صفحه اصلی";
+}
+
+
+<div class="container-main">
+    
+    @* !--- slider ---! *@
+    <div class="d-block">
+        <div class="col-lg-12 col-xs-12 pr mb-4">
+            <div class="slider-main-container d-block">
+                @await Component.InvokeAsync("SliderHome")
+            </div>
+        </div>
+    </div>
+
+
+    <div class="product-categories">
+        @await Component.InvokeAsync("PopularCategoryHome")
+    </div>
+
+</div>
+
+<div class="container-main">
+    <div class="d-block">
+        @await Component.InvokeAsync("AllProductInSlider")
+    </div>
+</div>
+
+<div class="container-main">
+    <div class="d-block">
+        <section class="section-slider amazing-section pt-3">
+            @await Component.InvokeAsync("LastProductInSlider")
+        </section>
+    </div>
+</div>
+
+
+

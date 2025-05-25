@@ -1,0 +1,55 @@
+﻿@using Shop.Domain.Models.Account
+@using Shop.Domain.ViewModels.Account
+@model EditUserProfileViewModel
+@{
+    ViewData["Title"] = "ویرایش حساب کاربری";
+}
+
+<div class="container-main">
+    <div class="d-block">
+
+        <div class="col-lg">
+            <div class="post-item-profile order-1 d-block">
+                <div class="col-lg-3 col-md-3 col-xs-12 pr">
+                    @await Component.InvokeAsync("UserSideBar")
+                </div>
+                <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                    <div class="profile-content">
+                        <div class="profile-stats">
+                            <div class="profile-address">
+                                <div class="middle-container">
+                                    <form asp-area="User" asp-controller="Account" asp-action="EditUserProfile" class="form-checkout" enctype="multipart/form-data">
+                                        <div class="form-checkout-row">
+                                            <label for="namefirst">نام <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                            <input asp-for="FirstName" type="text" id="namefirst" class="input-namefirst-checkout form-control">
+
+                                            <label for="namelast">نام خانوادگی <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                            <input asp-for="LastName" type="text" id="namelast" class="input-namelast-checkout form-control">
+
+                                            <label for="mobile">شماره تلفن همراه <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                            <input asp-for="PhoneNumber" type="text" id="mobile" class="input-name-checkout form-control">
+
+                                            <label for="gender">جنسیت <abbr class="required" title="ضروری" style="color:red;">*</abbr></label>
+                                            <select asp-for="UserGender" asp-items="@Html.GetEnumSelectList<UserGender>()"  id="gender" class="form-control"></select>
+
+                                            <label for="user-Avatar">آواتار</label>
+                                            <input name="userAvatar" type="file" id="user-Avatar" class="form-control"/>
+                                            <div class="AR-CR">
+                                                <button type="submit" class="btn-registrar"> ثبت تغییرات </button>
+                                                <a href="/User/" class="cancel-edit-address" data-dismiss="modal" aria-label="Close">بازگشت</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+

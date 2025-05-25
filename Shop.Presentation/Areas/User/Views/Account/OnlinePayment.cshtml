@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "نتیجه پرداخت";
+}
+
+
+<div class="container-main">
+    <div class="d-block">
+
+        <div class="col-lg">
+            <div class="post-item-profile order-1 d-block">
+                <div class="col-lg-3 col-md-3 col-xs-12 pr">
+                    @await Component.InvokeAsync("UserSideBar")
+                </div>
+                <div class="col-12">
+                    <div class="billing-fields mt-4">
+                        @if (ViewBag.Success == true && ViewBag.Success != null)
+                        {
+
+                            <h4 class="text-success">پرداخت دریافت شد</h4>
+                            <p class="thankyou-order-received">
+                                پرداخت با موفقیت انجام شد.سفارش شما با موفقیت ثبت شد
+                            </p>
+
+
+                        }
+                        else
+                        {
+                            <h4 class="text-danger">پرداخت دریافت نشد</h4>
+                            <p class="thankyou-order-received">
+                                پرداخت ناموفقیت انجام شد.
+                                چنانچه طی این فرایند مبلغی از حساب شما کسر شده است،طی 72 ساعت آینده
+                                به حساب شما باز خواهد گشت.
+                            </p>
+                        }
+                        <ul class="order-overview">
+                            <li class="order-overview-item">
+                                کد پرداخت :
+                                <span>@ViewBag.RefId</span>
+                            </li>
+                            <li class="order-overview-item">
+                                تاریخ :
+                                <span>@PersianDate.ToStringShamsiDate(DateTime.Now)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

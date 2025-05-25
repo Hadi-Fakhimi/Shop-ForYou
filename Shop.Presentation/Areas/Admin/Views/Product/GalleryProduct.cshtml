@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "افزودن گالری به محصول";
+    var productId = (long)ViewBag.ProductId;
+}
+<div class="row">
+    <div class="col-12 col-xl-12">
+        <h6 class="mb-0 text-uppercase">@ViewData["Title"]</h6>
+        <hr />
+        <div class="card">
+            <div class="card-body">
+                <div id="shopDropZone" class="dropzone"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script {
+    <partial name="_ValidationScriptsPartial"></partial>
+
+    <script>
+        function imageFiles(){
+            return 'images';
+        }
+
+        Dropzone.options.shopDropZone = {
+            url: '@Url.Action("AddImageToProduct", "Product", new { productId = productId })',
+            uploadMultiple: true,
+            maxFilesize: 10,
+            paramName: imageFiles,
+            maxFiles: 5,
+            acceptedFiles: ".png, .jpg, .jpeg",
+            init: function () {
+                this.on("successmultiple", function (file, response) {
+                    console.log(response);
+                    if(response.status == "Success"){
+                        ShowMessage('پیغام موفقیت','عملیات ثبت تصاویر با موفقیت انجام شد','success')
+                        window.location.replace('@Url.Action("FilterProduct", "Product")');
+                    }
+                });
+            }
+        };
+    </script>
+}

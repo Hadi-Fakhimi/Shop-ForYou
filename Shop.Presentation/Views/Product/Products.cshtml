@@ -1,0 +1,129 @@
+﻿@using Shop.Domain.Models.ProductEntities
+@using Shop.Domain.ViewModels.Admin.Products
+@model Shop.Domain.ViewModels.Admin.Products.FilterProductViewModel
+
+@{
+    ViewData["Title"] = "محصولات";
+
+    var productCategories = ViewData["ProductCategories"] as List<ProductCategory>;
+}
+
+
+<div class="container-main" style="transform: none;">
+    <div class="d-block" style="transform: none;">
+        <div class="page-content page-row" style="transform: none;">
+            <div class="main-row" style="transform: none;">
+                <div id="breadcrumb">
+                    <i class="mdi mdi-home"></i>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                            <li class="breadcrumb-item active open" aria-current="page">آرشیو محصولات</li>
+                        </ol>
+                    </nav>
+                </div>
+
+                <!-- start sidebar--------------------->
+                <div class="col-lg-3 col-md-3 col-xs-12 pr sticky-sidebar" style="position: relative; overflow: visible; box-sizing: border-box; min-height: 1px;">
+
+                    <div class="theiaStickySidebar" style="padding-top: 1px; padding-bottom: 1px; position: static; transform: none; top: 0px; left: 1131.4px;">
+                        <div class="shop-archive-sidebar">
+                            <div class="sidebar-archive mb-3">
+                                <section class="widget-product-categories">
+                                    <header class="cat-header">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-block text-right" data-toggle="collapse" href="#headingOne" role="button" aria-expanded="true" aria-controls="headingOne">
+                                                دسته بندی محصولات
+                                                <i class="mdi mdi-chevron-down"></i>
+                                            </button>
+                                        </h2>
+                                    </header>
+                                    <div class="product-filter">
+                                        <div class="card">
+                                            <div class="collapse show" id="headingOne" style="">
+                                                <div class="card-main mb-0">
+                                                    <div class="form-auth-row">
+                                                        <a asp-area="" asp-controller="Product" asp-action="Products" for="remember" class="remember-me text-secondary">همه</a>
+                                                    </div>
+                                                    @if (productCategories != null && productCategories.Any())
+                                                    {
+                                                        @foreach (var productCategory in productCategories)
+                                                        {
+                                                            <div class="form-auth-row">
+
+                                                                <a asp-area="" asp-controller="Product" asp-action="Products" asp-route-FilterByCategory="@productCategory.UrlName" for="remember" class="remember-me text-secondary">@productCategory.Title</a>
+
+                                                            </div>
+                                                        }
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="widget-product-categories">
+                                    <header class="cat-header">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-block text-right collapsed" data-toggle="collapse" href="#headingTwo" role="button" aria-expanded="false" aria-controls="headingTwo">
+                                                برند ها
+                                                <i class="mdi mdi-chevron-down"></i>
+                                            </button>
+                                        </h2>
+                                    </header>
+                                </section>
+                            </div>
+                        </div><div class="resize-sensor" style="position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden;"><div class="resize-sensor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0px; top: 0px; transition: all; width: 243px; height: 553px;"></div></div><div class="resize-sensor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div></div></div>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9 col-xs-12 pl">
+                    <div class="shop-archive-content mt-3 d-block">
+                        <div class="archive-header">
+                            <h2 class="archive-header-title">آرشیو محصولات</h2>
+                            <div class="sort-tabs mt-0 d-inline-block pr">
+                                <h4>مرتب‌سازی بر اساس :</h4>
+                            </div>
+                            <form asp-area="" asp-controller="Product" asp-action="Products" method="get" id="formProducts">
+                                <input type="hidden" asp-for="PageId" />
+                                <input type="hidden" asp-for="FilterByCategory" />
+                                <div class="nav-sort-tabs-res">
+                                    <select class="form-select form-select-sm text-secondary " asp-for="ProductOrder" asp-items="@Html.GetEnumSelectList<ProductOrder>()">
+                                    </select>
+
+
+                                    <button onclick="SubmitForm()" class="btn btn-sm btn-secondary">فیلتر</button>
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                        <div class="product-items">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade active show" id="Most-visited" role="tabpanel" aria-labelledby="Most-visited-tab">
+                                    <div class="row">
+                                        <partial name="_FilterProductBox" model="@Model.ProductItem" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <partial name="_Paging" model="@Model.GetCurrentPaging()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Script
+{
+    <script>
+
+        function SubmitForm(){
+
+            $("#formProducts").submit();
+        }
+
+
+    </script>
+}

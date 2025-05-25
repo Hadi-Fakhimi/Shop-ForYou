@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <partial name="_TagRefrencesPartial" />
+    <title>@ViewData["Title"]</title>
+    <partial name="_HeaderRefrencesPartial" />
+    @RenderSection("Styles", false)
+</head>
+
+<body>
+    <!-- header-------------------------------->
+    @await Component.InvokeAsync("SiteHeader")
+
+    <!-- header-------------------------------->
+        @RenderBody()
+    <!-- footer------------------------------------------->
+    @await Component.InvokeAsync("SiteFooter")
+    <!-- footer------------------------------------------->
+    <!-- scroll_Progress------------------------->
+    <div class="progress-wrap">
+        <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+    <!-- scroll_Progress------------------------->
+    <!-- Page Loader----------------------------->
+    <div class="P-loader">
+        <div class="P-loader-content">
+            <div class="logo-loader">
+                <img src="/images/logo.png" alt="logo" style="height:6rem;">
+            </div>
+            <div class="pic-loader text-center">
+                <img src="/images/three-dots.svg" width="50" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- Page Loader----------------------------->
+</body>
+<partial name="_FooterRefrencesPartial" />
+@RenderSection("Script", false)
+<partial name="_Message"/>
+</html>

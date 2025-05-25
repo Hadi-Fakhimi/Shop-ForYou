@@ -1,0 +1,48 @@
+﻿@using Shop.Application.StaticTools
+@model Shop.Domain.ViewModels.Site.Sliders.FilterSlidersViewModel
+@{
+    var number = 1;
+}
+@if (Model.Sliders != null && Model.Sliders.Any())
+{
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            @for (int i = 1; i <= Model.Sliders.Count; i++)
+            {
+
+                <li data-target="#carouselExampleIndicators" data-slide-to="@i" class="@( i == 1 ? "active" : "" )"></li>
+
+            }
+
+        </ol>
+        <div class="carousel-inner">
+            
+            @foreach (var item in Model.Sliders)
+            {
+
+                <div class="carousel-item carousel-item-h4 @(number == 1 ? "active" : "")">
+                    <img src="@(PathsExtensions.ImageSliderOrigin + item.SliderImageName)" class="d-block w-100 h-four-img"
+                         alt="اسلایدر">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>@item.SliderTitle</h3>
+                        <p>@item.SliderText</p>
+                        <p>@item.SliderPrice تومان</p>
+                        <a target="_blank" href="@item.SliderHref" class="btn btn-warning btn-buy mt-4">@item.SliderTextButton</a>
+                    </div>
+                </div>
+
+                number++;
+            }
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+           data-slide="prev">
+            <span class="fa fa-angle-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+           data-slide="next">
+            <span class="fa fa-angle-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+}

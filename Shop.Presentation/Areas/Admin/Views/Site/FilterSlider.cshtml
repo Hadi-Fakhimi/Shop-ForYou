@@ -1,0 +1,86 @@
+﻿@using Shop.Application.StaticTools
+@model Shop.Domain.ViewModels.Site.Sliders.FilterSlidersViewModel
+@{
+    ViewData["Title"] = "مدیریت اسلایدر ها";
+}
+
+
+<div class="row">
+    <div class="col">
+        <div class="card radius-10 mb-0">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <h5 class="mb-1">مدیریت اسلایدر ها</h5>
+                        <a asp-area="Admin" asp-controller="Site" asp-action="CreateSlider" class="btn btn-secondary btn-sm radius-10 mt-1">افزودن اسلایدر </a>
+                    </div>
+                    <form asp-area="Admin" asp-controller="Site" asp-action="FilterSlider" class="ms-auto" id="filter-Form" method="get">
+                        <input type="hidden" asp-for="PageId" />
+                        <label class="form-label" id="role-name"> فیلتر بر اساس عنوان:</label>
+                        <input type="text" asp-for="SliderTitle" class="form-control" placeholder="عنوان:" />
+                        <button class="btn btn-primary btn-sm radius-10 mt-1" type="submit">فیلتر</button>
+                    </form>
+                </div>
+
+                <div class="table-responsive mt-3">
+                    <table class="table align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>تصویر</th>
+                                <th>عنوان</th>
+                                <th>آدرس url</th>
+                                <th>تاریخ ایجاد</th>
+                                <th>عمل ها</th>
+                            </tr>
+                        </thead>
+
+                        @if (Model.Sliders != null && Model.Sliders.Any())
+                        {
+                                <tbody>
+                                @foreach (var item in Model.Sliders)
+                                {
+                                            <tr>
+
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="recent-product-img">
+                                                    <img src="@(!string.IsNullOrEmpty(item.SliderImageName)? PathsExtensions.ImageSliderThumb + item.SliderImageName : "")" alt="">
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                                <td>@item.SliderTitle</td>
+                                                <td>@item.SliderHref</td>
+                                                <td>@item.CreateDate.ToStringShamsiDate()</td>
+                                                <td>
+                                                    <div class="d-flex order-actions">
+                                                        <a class="text-danger bg-light-danger border-0"><i class='bx bxs-trash'></i></a>
+                                                        <a asp-area="Admin" asp-controller="Site" asp-action="EditSlider" asp-route-sliderId="@item.Id" class="ms-4 text-primary bg-light-primary border-0"><i class='bx bxs-edit'></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                }
+                                </tbody>
+                        }
+                        else
+                        {
+                                <div class="d-flex align-items-center">
+                                    <div class="font-35 text-info">
+                                        <i class="bx bx-info-square"></i>
+                                    </div>
+                                    <div class="ms-3">
+                                        <h6 class="mb-0 text-info">هشدار اطلاع</h6>
+                                        <div>آیتمی برای نمایش موجود نمی باشد</div>
+                                    </div>
+                                </div>
+                        }
+
+                    </table>
+                    <br />
+                    <partial name="_AdminPageingPartial" model="@Model.GetCurrentPaging()" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div><!--end row-->
